@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mervyn.sparrow.system.mapper.SysRoleMapper">
+
+    <resultMap id="BaseResultMap" type="com.mervyn.sparrow.system.model.SysRole">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="code" column="code" jdbcType="VARCHAR"/>
+            <result property="sort" column="sort" jdbcType="INTEGER"/>
+            <result property="scope" column="scope" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="VARCHAR"/>
+            <result property="deleted" column="deleted" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,name,code,
+        sort,scope,status,
+        deleted
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from sys_role
+        where  id = #{id,jdbcType=BIGINT} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from sys_role
+        where  id = #{id,jdbcType=BIGINT} 
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mervyn.sparrow.system.model.SysRole" useGeneratedKeys="true">
+        insert into sys_role
+        ( id,name,code
+        ,sort,scope,status
+        ,deleted)
+        values (#{id,jdbcType=BIGINT},#{name,jdbcType=VARCHAR},#{code,jdbcType=VARCHAR}
+        ,#{sort,jdbcType=INTEGER},#{scope,jdbcType=VARCHAR},#{status,jdbcType=VARCHAR}
+        ,#{deleted,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.mervyn.sparrow.system.model.SysRole" useGeneratedKeys="true">
+        insert into sys_role
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="name != null">name,</if>
+                <if test="code != null">code,</if>
+                <if test="sort != null">sort,</if>
+                <if test="scope != null">scope,</if>
+                <if test="status != null">status,</if>
+                <if test="deleted != null">deleted,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null">#{id,jdbcType=BIGINT},</if>
+                <if test="name != null">#{name,jdbcType=VARCHAR},</if>
+                <if test="code != null">#{code,jdbcType=VARCHAR},</if>
+                <if test="sort != null">#{sort,jdbcType=INTEGER},</if>
+                <if test="scope != null">#{scope,jdbcType=VARCHAR},</if>
+                <if test="status != null">#{status,jdbcType=VARCHAR},</if>
+                <if test="deleted != null">#{deleted,jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mervyn.sparrow.system.model.SysRole">
+        update sys_role
+        <set>
+                <if test="name != null">
+                    name = #{name,jdbcType=VARCHAR},
+                </if>
+                <if test="code != null">
+                    code = #{code,jdbcType=VARCHAR},
+                </if>
+                <if test="sort != null">
+                    sort = #{sort,jdbcType=INTEGER},
+                </if>
+                <if test="scope != null">
+                    scope = #{scope,jdbcType=VARCHAR},
+                </if>
+                <if test="status != null">
+                    status = #{status,jdbcType=VARCHAR},
+                </if>
+                <if test="deleted != null">
+                    deleted = #{deleted,jdbcType=VARCHAR},
+                </if>
+        </set>
+        where   id = #{id,jdbcType=BIGINT} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mervyn.sparrow.system.model.SysRole">
+        update sys_role
+        set 
+            name =  #{name,jdbcType=VARCHAR},
+            code =  #{code,jdbcType=VARCHAR},
+            sort =  #{sort,jdbcType=INTEGER},
+            scope =  #{scope,jdbcType=VARCHAR},
+            status =  #{status,jdbcType=VARCHAR},
+            deleted =  #{deleted,jdbcType=VARCHAR}
+        where   id = #{id,jdbcType=BIGINT} 
+    </update>
+</mapper>

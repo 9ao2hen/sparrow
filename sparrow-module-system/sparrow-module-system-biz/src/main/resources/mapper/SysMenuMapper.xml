@@ -1,0 +1,130 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.mervyn.sparrow.system.mapper.SysMenuMapper">
+
+    <resultMap id="BaseResultMap" type="com.mervyn.sparrow.system.model.SysMenu">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="parentId" column="parent_id" jdbcType="INTEGER"/>
+            <result property="name" column="name" jdbcType="VARCHAR"/>
+            <result property="path" column="path" jdbcType="VARCHAR"/>
+            <result property="type" column="type" jdbcType="CHAR"/>
+            <result property="permission" column="permission" jdbcType="VARCHAR"/>
+            <result property="icon" column="icon" jdbcType="VARCHAR"/>
+            <result property="sort" column="sort" jdbcType="VARCHAR"/>
+            <result property="status" column="status" jdbcType="BIT"/>
+            <result property="deleted" column="deleted" jdbcType="BIT"/>
+            <result property="remark" column="remark" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,parent_id,name,
+        path,type,permission,
+        icon,sort,status,
+        deleted,remark
+    </sql>
+
+    <select id="selectByPrimaryKey" parameterType="java.lang.Long" resultMap="BaseResultMap">
+        select
+        <include refid="Base_Column_List" />
+        from sys_menu
+        where  id = #{id,jdbcType=BIGINT} 
+    </select>
+
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from sys_menu
+        where  id = #{id,jdbcType=BIGINT} 
+    </delete>
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mervyn.sparrow.system.model.SysMenu" useGeneratedKeys="true">
+        insert into sys_menu
+        ( id,parent_id,name
+        ,path,type,permission
+        ,icon,sort,status
+        ,deleted,remark)
+        values (#{id,jdbcType=BIGINT},#{parentId,jdbcType=INTEGER},#{name,jdbcType=VARCHAR}
+        ,#{path,jdbcType=VARCHAR},#{type,jdbcType=CHAR},#{permission,jdbcType=VARCHAR}
+        ,#{icon,jdbcType=VARCHAR},#{sort,jdbcType=VARCHAR},#{status,jdbcType=BIT}
+        ,#{deleted,jdbcType=BIT},#{remark,jdbcType=VARCHAR})
+    </insert>
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.mervyn.sparrow.system.model.SysMenu" useGeneratedKeys="true">
+        insert into sys_menu
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+                <if test="id != null">id,</if>
+                <if test="parentId != null">parent_id,</if>
+                <if test="name != null">name,</if>
+                <if test="path != null">path,</if>
+                <if test="type != null">type,</if>
+                <if test="permission != null">permission,</if>
+                <if test="icon != null">icon,</if>
+                <if test="sort != null">sort,</if>
+                <if test="status != null">status,</if>
+                <if test="deleted != null">deleted,</if>
+                <if test="remark != null">remark,</if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+                <if test="id != null">#{id,jdbcType=BIGINT},</if>
+                <if test="parentId != null">#{parentId,jdbcType=INTEGER},</if>
+                <if test="name != null">#{name,jdbcType=VARCHAR},</if>
+                <if test="path != null">#{path,jdbcType=VARCHAR},</if>
+                <if test="type != null">#{type,jdbcType=CHAR},</if>
+                <if test="permission != null">#{permission,jdbcType=VARCHAR},</if>
+                <if test="icon != null">#{icon,jdbcType=VARCHAR},</if>
+                <if test="sort != null">#{sort,jdbcType=VARCHAR},</if>
+                <if test="status != null">#{status,jdbcType=BIT},</if>
+                <if test="deleted != null">#{deleted,jdbcType=BIT},</if>
+                <if test="remark != null">#{remark,jdbcType=VARCHAR},</if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKeySelective" parameterType="com.mervyn.sparrow.system.model.SysMenu">
+        update sys_menu
+        <set>
+                <if test="parentId != null">
+                    parent_id = #{parentId,jdbcType=INTEGER},
+                </if>
+                <if test="name != null">
+                    name = #{name,jdbcType=VARCHAR},
+                </if>
+                <if test="path != null">
+                    path = #{path,jdbcType=VARCHAR},
+                </if>
+                <if test="type != null">
+                    type = #{type,jdbcType=CHAR},
+                </if>
+                <if test="permission != null">
+                    permission = #{permission,jdbcType=VARCHAR},
+                </if>
+                <if test="icon != null">
+                    icon = #{icon,jdbcType=VARCHAR},
+                </if>
+                <if test="sort != null">
+                    sort = #{sort,jdbcType=VARCHAR},
+                </if>
+                <if test="status != null">
+                    status = #{status,jdbcType=BIT},
+                </if>
+                <if test="deleted != null">
+                    deleted = #{deleted,jdbcType=BIT},
+                </if>
+                <if test="remark != null">
+                    remark = #{remark,jdbcType=VARCHAR},
+                </if>
+        </set>
+        where   id = #{id,jdbcType=BIGINT} 
+    </update>
+    <update id="updateByPrimaryKey" parameterType="com.mervyn.sparrow.system.model.SysMenu">
+        update sys_menu
+        set 
+            parent_id =  #{parentId,jdbcType=INTEGER},
+            name =  #{name,jdbcType=VARCHAR},
+            path =  #{path,jdbcType=VARCHAR},
+            type =  #{type,jdbcType=CHAR},
+            permission =  #{permission,jdbcType=VARCHAR},
+            icon =  #{icon,jdbcType=VARCHAR},
+            sort =  #{sort,jdbcType=VARCHAR},
+            status =  #{status,jdbcType=BIT},
+            deleted =  #{deleted,jdbcType=BIT},
+            remark =  #{remark,jdbcType=VARCHAR}
+        where   id = #{id,jdbcType=BIGINT} 
+    </update>
+</mapper>
