@@ -23,5 +23,22 @@ public final class Results {
                 data);
     }
 
+    public static <T> Result<T> error(){
+        return new DefaultResult(ResponseEnum.ResultCode.error.getCode(),
+                ResponseEnum.ResultCode.error.getMsg(),null);
+    }
+
+    public static Result<Void> error(String msg){
+        return new DefaultResult(ResponseEnum.ResultCode.error.getCode(), msg,null);
+    }
+
+    public static Result<Void> error(String code,String msg){
+        return new DefaultResult(code, msg,null);
+    }
+
+    public static <T> Result<T> error(String msg,T data){
+        return new DefaultResult(ResponseEnum.ResultCode.error.getCode(), msg,data);
+    }
+
 
 }

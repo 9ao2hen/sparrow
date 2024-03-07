@@ -44,6 +44,15 @@
                 <version>${revision}</version>
             </dependency>
 
+            <dependency>
+                <groupId>com.mervyn</groupId>
+                <artifactId>sparrow-framework</artifactId>
+                <version>${revision}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+
+
         </dependencies>
     </dependencyManagement>
 

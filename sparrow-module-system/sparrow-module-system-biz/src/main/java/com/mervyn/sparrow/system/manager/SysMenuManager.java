@@ -1,7 +1,6 @@
 package com.mervyn.sparrow.system.manager;
 
 import com.mervyn.sparrow.system.entity.SysMenuDTO;
-import org.springframework.stereotype.Component;
 
 /**
  * @author 2hen9ao
@@ -9,4 +8,10 @@ import org.springframework.stereotype.Component;
  */
 public interface SysMenuManager {
     Long add(SysMenuDTO menuDTO);
+
+    Long update(SysMenuDTO menuDTO);
+
+    Long delete(Long id);
+
+    SysMenuDTO getById(Long id);
 }

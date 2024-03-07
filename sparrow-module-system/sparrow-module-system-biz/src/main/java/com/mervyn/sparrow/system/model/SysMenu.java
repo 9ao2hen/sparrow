@@ -54,7 +54,7 @@ public class SysMenu {
     /**
      * 状态 ‘1’：正常 ‘2’：禁用
      */
-    private Boolean status;
+    private String status;
 
     /**
      * 删除状态 ‘0’正常，‘1’：删除

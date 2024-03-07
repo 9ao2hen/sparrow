@@ -14,10 +14,18 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/test")
 public class DemoController {
 
+
+
     @GetMapping("")
     public Result<String> test(){
         Result<String> success = Results.success("success");
         return success;
+    }
+
+
+    @GetMapping("/error")
+    public Result error() throws Exception {
+        throw new Exception("错了错了");
     }
 
 
