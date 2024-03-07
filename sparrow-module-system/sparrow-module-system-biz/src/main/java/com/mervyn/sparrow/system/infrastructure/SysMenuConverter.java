@@ -1,6 +1,11 @@
 package com.mervyn.sparrow.system.infrastructure;
 
+import com.mervyn.sparrow.system.entity.SysMenuDTO;
+import com.mervyn.sparrow.system.model.SysMenu;
 import org.mapstruct.Mapper;
+import org.mapstruct.factory.Mappers;
+
+import java.util.List;
 
 /**
  * $
@@ -11,6 +16,14 @@ import org.mapstruct.Mapper;
 @Mapper
 public interface SysMenuConverter {
 
-    
+    SysMenuConverter INSTANCE = Mappers.getMapper( SysMenuConverter.class );
+
+    SysMenuDTO po2Dto(SysMenu menu);
+
+    List<SysMenuDTO> po2Dto(List<SysMenu> menu);
+
+    SysMenu dto2Po(SysMenuDTO dto);
+    List<SysMenu> dto2Po(List<SysMenuDTO> dto);
+
 
 }
