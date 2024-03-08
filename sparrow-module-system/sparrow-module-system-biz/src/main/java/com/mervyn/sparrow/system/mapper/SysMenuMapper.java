@@ -1,7 +1,8 @@
 package com.mervyn.sparrow.system.mapper;
 
-
 import com.mervyn.sparrow.system.model.SysMenu;
+
+import java.util.List;
 
 /**
 * @author 2hen9ao
@@ -22,5 +23,8 @@ public interface SysMenuMapper {
     int updateByPrimaryKeySelective(SysMenu record);
 
     int updateByPrimaryKey(SysMenu record);
+
+    List<SysMenu> selectList(SysMenu param);
+
 
 }

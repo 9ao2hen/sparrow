@@ -10,6 +10,8 @@
     </parent>
 
     <artifactId>sparrow-server-system</artifactId>
+    <version>${revision}</version>
+    <packaging>jar</packaging>
 
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -18,11 +20,8 @@
     <dependencies>
         <dependency>
             <groupId>com.mervyn</groupId>
-            <artifactId>sparrow-common</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>com.mervyn</groupId>
             <artifactId>sparrow-framework-exception</artifactId>
+            <version>${revision}</version>
         </dependency>
 
         <dependency>

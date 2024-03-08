@@ -1,6 +1,9 @@
 package com.mervyn.sparrow.system.manager;
 
 import com.mervyn.sparrow.system.entity.SysMenuDTO;
+import com.mervyn.sparrow.system.model.SysMenu;
+
+import java.util.List;
 
 /**
  * @author 2hen9ao
@@ -13,5 +16,7 @@ public interface SysMenuManager {
 
     Long delete(Long id);
 
-    SysMenuDTO getById(Long id);
+    SysMenu getById(Long id);
+
+    List<SysMenu> selectMenu(SysMenu menu);
 }

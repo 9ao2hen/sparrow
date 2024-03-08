@@ -9,6 +9,8 @@ import com.mervyn.sparrow.system.model.SysMenu;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 /**
  * @author 9ao2hen
  * @date 2024/3/6 15:53
@@ -46,9 +48,15 @@ public class SysMenuManagerImpl implements SysMenuManager {
     }
 
     @Override
-    public SysMenuDTO getById(Long id){
+    public SysMenu getById(Long id){
         SysMenu sysMenu = mapper.selectByPrimaryKey(id);
-        return SysMenuConverter.INSTANCE.po2Dto(sysMenu);
+        return sysMenu;
+    }
+
+
+    @Override
+    public List<SysMenu> selectMenu(SysMenu menu){
+        return mapper.selectList(menu);
     }
 
 

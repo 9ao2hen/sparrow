@@ -11,6 +11,7 @@
     </parent>
 
     <artifactId>sparrow-framework</artifactId>
+    <version>${revision}</version>
     <packaging>pom</packaging>
     <modules>
         <module>sparrow-framework-web</module>
@@ -20,6 +21,14 @@
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.mervyn</groupId>
+            <artifactId>sparrow-common</artifactId>
+            <version>${revision}</version>
+        </dependency>
+    </dependencies>
 
 
 </project>

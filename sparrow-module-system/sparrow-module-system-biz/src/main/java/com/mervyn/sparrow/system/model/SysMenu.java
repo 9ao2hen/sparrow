@@ -4,8 +4,9 @@ package com.mervyn.sparrow.system.model;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.Date;
+
 /**
- * 
  * @TableName sys_menu
  */
 @Getter
@@ -19,7 +20,7 @@ public class SysMenu {
     /**
      * 父级菜单 id
      */
-    private Integer parentId;
+    private Long parentId;
 
     /**
      * 菜单名称
@@ -62,8 +63,12 @@ public class SysMenu {
     private Boolean deleted;
 
     /**
-     * 
+     *
      */
     private String remark;
+
+    private Date createTime;
+
+    private Date updateTime;
 
 }

@@ -37,22 +37,6 @@
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
-
-            <dependency>
-                <groupId>com.mervyn</groupId>
-                <artifactId>sparrow-common</artifactId>
-                <version>${revision}</version>
-            </dependency>
-
-            <dependency>
-                <groupId>com.mervyn</groupId>
-                <artifactId>sparrow-framework</artifactId>
-                <version>${revision}</version>
-                <type>pom</type>
-                <scope>import</scope>
-            </dependency>
-
-
         </dependencies>
     </dependencyManagement>
 
