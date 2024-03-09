@@ -9,6 +9,12 @@ import java.util.List;
  * @date 2024/3/4 20:24
  */
 public interface SysMenuService {
+    Long createMenu(SysMenuDTO menuDTO);
+
+    SysMenuDTO modifyMenu(SysMenuDTO menuDTO);
+
+    Long deleteMenu(Long menuId);
+
     Long disableMenu(Long menuId);
 
     Long enableMenu(Long menuId);

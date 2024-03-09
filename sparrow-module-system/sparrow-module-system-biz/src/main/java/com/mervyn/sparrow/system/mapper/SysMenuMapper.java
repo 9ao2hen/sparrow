@@ -1,6 +1,7 @@
 package com.mervyn.sparrow.system.mapper;
 
 import com.mervyn.sparrow.system.model.SysMenu;
+import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
 
@@ -10,6 +11,7 @@ import java.util.List;
 * @createDate 2024-03-04 20:15:17
 * @Entity generator.com.mervyn.sparrow.system.SysMenu
 */
+@Mapper
 public interface SysMenuMapper {
 
     int deleteByPrimaryKey(Long id);

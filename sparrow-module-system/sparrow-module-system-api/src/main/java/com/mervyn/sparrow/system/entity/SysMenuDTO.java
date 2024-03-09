@@ -19,7 +19,7 @@ public class SysMenuDTO {
     /**
      * 父级菜单 id
      */
-    private Integer parentId;
+    private Long parentId;
 
     /**
      * 菜单名称

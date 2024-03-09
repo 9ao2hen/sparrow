@@ -27,6 +27,7 @@ public class SysMenuServiceImpl implements SysMenuService {
      * @param menuDTO
      * @return
      */
+    @Override
     public Long createMenu(SysMenuDTO menuDTO) {
         return manager.add(menuDTO);
     }
@@ -37,6 +38,7 @@ public class SysMenuServiceImpl implements SysMenuService {
      * @param menuDTO
      * @return
      */
+    @Override
     public SysMenuDTO modifyMenu(SysMenuDTO menuDTO) {
         Long update = manager.update(menuDTO);
         return update != null ? menuDTO : null;
@@ -48,6 +50,7 @@ public class SysMenuServiceImpl implements SysMenuService {
      * @param menuId
      * @return
      */
+    @Override
     public Long deleteMenu(Long menuId) {
         return manager.delete(menuId);
     }
@@ -69,19 +72,18 @@ public class SysMenuServiceImpl implements SysMenuService {
     }
 
     @Override
-    public SysMenuDTO getById(Long menuId){
+    public SysMenuDTO getById(Long menuId) {
         SysMenu sysMenu = manager.getById(menuId);
         return SysMenuConverter.INSTANCE.po2Dto(sysMenu);
     }
 
     @Override
-    public List<SysMenuDTO> getByParentId(Long parentId){
+    public List<SysMenuDTO> getByParentId(Long parentId) {
         SysMenu sysMenu = new SysMenu();
         sysMenu.setParentId(parentId);
         List<SysMenu> menuList = manager.selectMenu(sysMenu);
         return SysMenuConverter.INSTANCE.po2Dto(menuList);
     }
-
 
 
 }
