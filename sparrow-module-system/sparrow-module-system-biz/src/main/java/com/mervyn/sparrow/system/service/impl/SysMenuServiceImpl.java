@@ -1,6 +1,7 @@
 package com.mervyn.sparrow.system.service.impl;
 
 import com.mervyn.sparrow.common.enums.SystemEnum;
+import com.mervyn.sparrow.common.utils.IdGenerator;
 import com.mervyn.sparrow.system.entity.SysMenuDTO;
 import com.mervyn.sparrow.system.infrastructure.SysMenuConverter;
 import com.mervyn.sparrow.system.manager.SysMenuManager;
@@ -28,8 +29,10 @@ public class SysMenuServiceImpl implements SysMenuService {
      * @return
      */
     @Override
-    public Long createMenu(SysMenuDTO menuDTO) {
-        return manager.add(menuDTO);
+    public String createMenu(SysMenuDTO menuDTO) {
+        menuDTO.setId(IdGenerator.genIdStr());
+        Long id = manager.add(menuDTO);
+        return String.valueOf(id);
     }
 
     /**
@@ -51,24 +54,27 @@ public class SysMenuServiceImpl implements SysMenuService {
      * @return
      */
     @Override
-    public Long deleteMenu(Long menuId) {
-        return manager.delete(menuId);
+    public String deleteMenu(String menuId) {
+        Long id = manager.delete(Long.getLong(menuId));
+        return String.valueOf(id);
     }
 
     @Override
-    public Long disableMenu(Long menuId) {
+    public String disableMenu(String menuId) {
         SysMenuDTO menuDTO = new SysMenuDTO();
         menuDTO.setId(menuId);
         menuDTO.setStatus(SystemEnum.CommonStatus.disable.getCode());
-        return manager.update(menuDTO);
+        Long id = manager.update(menuDTO);
+        return String.valueOf(id);
     }
 
     @Override
-    public Long enableMenu(Long menuId) {
+    public String enableMenu(String menuId) {
         SysMenuDTO menuDTO = new SysMenuDTO();
         menuDTO.setId(menuId);
         menuDTO.setStatus(SystemEnum.CommonStatus.enable.getCode());
-        return manager.update(menuDTO);
+        Long id = manager.update(menuDTO);
+        return String.valueOf(id);
     }
 
     @Override
@@ -78,9 +84,9 @@ public class SysMenuServiceImpl implements SysMenuService {
     }
 
     @Override
-    public List<SysMenuDTO> getByParentId(Long parentId) {
+    public List<SysMenuDTO> getByParentId(String parentId) {
         SysMenu sysMenu = new SysMenu();
-        sysMenu.setParentId(parentId);
+        sysMenu.setParentId(Long.valueOf(parentId));
         List<SysMenu> menuList = manager.selectMenu(sysMenu);
         return SysMenuConverter.INSTANCE.po2Dto(menuList);
     }

@@ -8,8 +8,15 @@ import cn.hutool.core.util.IdUtil;
  */
 public class IdGenerator {
 
+    private static int WORKER_ID = 1;
+    private static int DATACENTER_ID = 1;
+
     public static Long genId(){
-        return IdUtil.getSnowflake(1,1).nextId();
+        return IdUtil.getSnowflake(WORKER_ID,DATACENTER_ID).nextId();
+    }
+
+    public static String genIdStr(){
+        return IdUtil.getSnowflake(WORKER_ID,DATACENTER_ID).nextIdStr();
     }
 
 }

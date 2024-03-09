@@ -9,17 +9,17 @@ import java.util.List;
  * @date 2024/3/4 20:24
  */
 public interface SysMenuService {
-    Long createMenu(SysMenuDTO menuDTO);
+    String createMenu(SysMenuDTO menuDTO);
 
     SysMenuDTO modifyMenu(SysMenuDTO menuDTO);
 
-    Long deleteMenu(Long menuId);
+    String deleteMenu(String menuId);
 
-    Long disableMenu(Long menuId);
+    String disableMenu(String menuId);
 
-    Long enableMenu(Long menuId);
+    String enableMenu(String menuId);
 
     SysMenuDTO getById(Long menuId);
 
-    List<SysMenuDTO> getByParentId(Long parentId);
+    List<SysMenuDTO> getByParentId(String parentId);
 }

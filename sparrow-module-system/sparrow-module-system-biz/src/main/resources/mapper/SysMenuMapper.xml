@@ -47,8 +47,7 @@
         from sys_menu
         where id = #{id,jdbcType=BIGINT}
     </delete>
-    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mervyn.sparrow.system.model.SysMenu"
-            useGeneratedKeys="true">
+    <insert id="insert" keyColumn="id" keyProperty="id" parameterType="com.mervyn.sparrow.system.model.SysMenu">
         insert into sys_menu
         ( id, parent_id, name
         , path, type, permission
@@ -60,8 +59,7 @@
                , #{deleted,jdbcType=BIT}, #{remark,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}
                , #{updateTime,jdbcType=TIMESTAMP})
     </insert>
-    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.mervyn.sparrow.system.model.SysMenu"
-            useGeneratedKeys="true">
+    <insert id="insertSelective" keyColumn="id" keyProperty="id" parameterType="com.mervyn.sparrow.system.model.SysMenu">
         insert into sys_menu
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">

@@ -25,8 +25,8 @@ public class SystemMenuController {
     }
 
     @PostMapping("/add")
-    public Result<Long> addMenu(@RequestBody SysMenuDTO menuDTO){
-        Long menuId = menuService.createMenu(menuDTO);
+    public Result<String> addMenu(@RequestBody SysMenuDTO menuDTO){
+        String menuId = menuService.createMenu(menuDTO);
         return Results.success(menuId);
     }
 
