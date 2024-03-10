@@ -25,6 +25,10 @@ public class SysMenuDTO {
      * 菜单路径
      */
     private String path;
+    /**
+     * 菜单组件路由
+     */
+    private String component;
 
     /**
      * 菜单类型 M:目录,C:菜单，F：按钮

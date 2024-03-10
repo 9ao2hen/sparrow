@@ -27,6 +27,8 @@ public class SysMenu {
      */
     private String path;
 
+    private String component;
+
     /**
      * 菜单类型 M:目录,C:菜单，F：按钮
      */
