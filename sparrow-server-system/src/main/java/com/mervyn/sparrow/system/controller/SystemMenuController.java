@@ -18,20 +18,28 @@ public class SystemMenuController {
     @Resource
     SysMenuService menuService;
 
+
+    @GetMapping("/routers")
+    public Result<SysMenuDTO> getRouters() {
+        //TODO
+//        menuService.
+        return Results.success(null);
+    }
+
     @GetMapping("/info")
-    public Result<SysMenuDTO> getById(@RequestParam(name = "id") Long id){
+    public Result<SysMenuDTO> getById(@RequestParam(name = "id") Long id) {
         SysMenuDTO menuDTO = menuService.getById(id);
         return Results.success(menuDTO);
     }
 
     @PostMapping("/add")
-    public Result<String> addMenu(@RequestBody SysMenuDTO menuDTO){
+    public Result<String> addMenu(@RequestBody SysMenuDTO menuDTO) {
         String menuId = menuService.createMenu(menuDTO);
         return Results.success(menuId);
     }
 
     @PostMapping("/update")
-    public Result<SysMenuDTO> updateMenu(@RequestBody SysMenuDTO menuDTO){
+    public Result<SysMenuDTO> updateMenu(@RequestBody SysMenuDTO menuDTO) {
         SysMenuDTO modifyMenu = menuService.modifyMenu(menuDTO);
         return Results.success(modifyMenu);
     }
