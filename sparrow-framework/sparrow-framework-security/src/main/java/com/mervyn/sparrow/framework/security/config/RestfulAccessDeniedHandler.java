@@ -2,11 +2,13 @@ package com.mervyn.sparrow.framework.security.config;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.security.access.AccessDeniedException;
 import org.springframework.security.web.access.AccessDeniedHandler;
 
 import java.io.IOException;
 
+@Configuration
 public class RestfulAccessDeniedHandler implements AccessDeniedHandler {
 
     @Override
