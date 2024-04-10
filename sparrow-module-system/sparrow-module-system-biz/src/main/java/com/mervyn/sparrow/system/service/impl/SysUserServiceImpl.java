@@ -1,9 +1,11 @@
 package com.mervyn.sparrow.system.service.impl;
 
+import cn.hutool.core.util.StrUtil;
 import com.mervyn.sparrow.common.enums.SystemEnum;
 import com.mervyn.sparrow.config.util.Exps;
 import com.mervyn.sparrow.framework.security.JwtAuthenticationToken;
 import com.mervyn.sparrow.framework.security.util.JwtTokenUtil;
+import com.mervyn.sparrow.system.constant.SystemUserConstant;
 import com.mervyn.sparrow.system.entity.SysMenuDTO;
 import com.mervyn.sparrow.system.entity.SysUserDTO;
 import com.mervyn.sparrow.system.manager.SysUserManager;
@@ -57,6 +59,9 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public String createUser(SysUserDTO userDTO) {
+        String password = StrUtil.isNotBlank(userDTO.getPassword())? userDTO.getPassword():SystemUserConstant.ADMIN_DEFAULT_PASSWORD;
+        String encodePsd = passwordEncoder.encode(password);
+        userDTO.setPassword(encodePsd);
         Long userId = userManager.createUser(userDTO);
         return userId != null ? String.valueOf(userId) : null;
     }

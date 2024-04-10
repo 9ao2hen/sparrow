@@ -11,8 +11,8 @@
     </parent>
 
     <artifactId>sparrow-framework</artifactId>
-    <version>${revision}</version>
     <packaging>pom</packaging>
+    <version>${revision}</version>
     <modules>
         <module>sparrow-framework-web</module>
         <module>sparrow-framework-exception</module>
@@ -20,6 +20,7 @@
     </modules>
 
     <properties>
+        <revision>1.0-SNAPSHOT</revision>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
