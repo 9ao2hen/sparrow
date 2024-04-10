@@ -1,6 +1,7 @@
 package com.mervyn.sparrow.system.service;
 
 import com.mervyn.sparrow.system.entity.SysUserDTO;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
 
@@ -9,6 +10,8 @@ import java.util.List;
  * @date 2024/3/4 20:24
  */
 public interface SysUserService {
+
+    String login(String username, String password);
 
     String createUser(SysUserDTO userDTO);
 
@@ -22,5 +25,9 @@ public interface SysUserService {
 
     SysUserDTO getUserById(String userId);
 
+    SysUserDTO getUserByUserName(String username);
+
     List<SysUserDTO> getList(SysUserDTO userDTO);
+
+    UserDetails loadUserByUsername(String username);
 }

@@ -69,6 +69,12 @@ public class SysUserManagerImpl implements SysUserManager {
     }
 
     @Override
+    public SysUserDTO getUserByUserName(String username) {
+        SysUser sysUser = mapper.selectByUsername(username);
+        return SysUserConverter.INSTANCE.po2Dto(sysUser);
+    }
+
+    @Override
     public List<SysUserDTO> getList(SysUserDTO userDTO) {
         SysUser sysUser = SysUserConverter.INSTANCE.dto2Po(userDTO);
         List<SysUser> userList = mapper.selectList(sysUser);

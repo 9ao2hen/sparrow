@@ -10,7 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
  * @date 2024/3/5 10:13
  */
 @RestController
-@SpringBootApplication(scanBasePackages = {"com.mervyn.sparrow.system","com.mervyn.sparrow.config"})
+@SpringBootApplication(scanBasePackages = {"com.mervyn.sparrow.system","com.mervyn.sparrow.config","com.mervyn.sparrow.framework"})
 public class SparrowSystemApplication {
 
     public static void main(String[] args) {

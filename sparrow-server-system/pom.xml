@@ -25,6 +25,11 @@
         </dependency>
         <dependency>
             <groupId>com.mervyn</groupId>
+            <artifactId>sparrow-framework-security</artifactId>
+            <version>${revision}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.mervyn</groupId>
             <artifactId>sparrow-module-system-biz</artifactId>
             <version>${revision}</version>
         </dependency>

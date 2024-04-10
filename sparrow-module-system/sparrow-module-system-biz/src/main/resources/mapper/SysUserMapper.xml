@@ -168,6 +168,12 @@
         </if>
         order by update_time desc
     </select>
-
-    
+    <select id="selectByUsername" resultType="com.mervyn.sparrow.system.model.SysUser">
+        select *
+        from sys_user
+        where deleted = false
+        and username = #{username}
+        order by update_time desc
+        limit 1
+    </select>
 </mapper>
