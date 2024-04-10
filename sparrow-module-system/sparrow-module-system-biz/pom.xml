@@ -27,6 +27,11 @@
             <artifactId>sparrow-module-system-api</artifactId>
             <version>${revision}</version>
         </dependency>
+        <dependency>
+            <groupId>com.mervyn</groupId>
+            <artifactId>sparrow-framework-exception</artifactId>
+            <version>${revision}</version>
+        </dependency>
 
         <dependency>
             <groupId>org.springframework.boot</groupId>

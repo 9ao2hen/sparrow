@@ -20,5 +20,7 @@ public interface SysUserManager {
 
     SysUserDTO getUserById(Long userId);
 
+    SysUserDTO getUserByUserName(String username);
+
     List<SysUserDTO> getList(SysUserDTO userDTO);
 }
