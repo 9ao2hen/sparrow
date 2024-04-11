@@ -23,4 +23,5 @@ public interface SysUserManager {
     SysUserDTO getUserByUserName(String username);
 
     List<SysUserDTO> getList(SysUserDTO userDTO);
+
 }
