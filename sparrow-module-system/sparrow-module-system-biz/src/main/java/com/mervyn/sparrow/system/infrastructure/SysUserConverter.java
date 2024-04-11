@@ -2,6 +2,7 @@ package com.mervyn.sparrow.system.infrastructure;
 
 import com.mervyn.sparrow.system.entity.SysUserDTO;
 import com.mervyn.sparrow.system.model.SysUser;
+import com.mervyn.sparrow.system.view.SysUserVo;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -26,5 +27,8 @@ public interface SysUserConverter {
 
     List<SysUser> dto2Po(List<SysUserDTO> dto);
 
+    SysUserVo dto2Vo(SysUserDTO dto);
+
+    List<SysUserVo> dto2Vo(List<SysUserDTO> dto);
 
 }

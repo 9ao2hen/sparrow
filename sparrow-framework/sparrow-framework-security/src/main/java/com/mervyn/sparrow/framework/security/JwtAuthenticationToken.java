@@ -20,7 +20,7 @@ public class JwtAuthenticationToken extends AbstractAuthenticationToken {
         super(authorities);
         this.principal = principal;
         this.credentials = credentials;
-        super.setAuthenticated(false);
+        super.setAuthenticated(true);
     }
 
     public JwtAuthenticationToken(Object principal, Object credentials) {
