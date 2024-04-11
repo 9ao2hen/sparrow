@@ -1,4 +1,4 @@
-package com.mervyn.sparrow.system.security;
+package com.mervyn.sparrow.framework.security.config;
 
 import org.springframework.boot.context.properties.ConfigurationProperties;
 import org.springframework.stereotype.Component;
@@ -14,7 +14,7 @@ import java.util.List;
 @ConfigurationProperties(prefix = "security.ignoring")
 public class IgnoreUrlsConfig {
 
-    List<String> urls = new ArrayList<>();
+    private List<String> urls = new ArrayList<>();
 
     public List<String> getUrls() {
         return urls;

@@ -1,0 +1,22 @@
+spring:
+  datasource:
+    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:mysql://localhost:3306/sparrow
+    username: root
+    password: "123456"
+
+mybatis:
+  mapper-locations: classpath*:mapper/*Mapper.xml
+
+jwt:
+  token-header: Authorization
+  token-prefix: "'Bearer '"
+  secret: sparrow-secret
+  expiration: "86400"
+
+security:
+  ignoring:
+    urls:
+      - /test/error
+      - /test/ass
+

@@ -103,8 +103,6 @@ public class SysUserServiceImpl implements SysUserService {
         return list;
     }
 
-
-
     @Override
     public UserDetails loadUserByUsername(String username){
         //获取用户信息
@@ -117,4 +115,6 @@ public class SysUserServiceImpl implements SysUserService {
         }
         throw new UsernameNotFoundException("用户名或密码错误");
     }
+
+
 }
