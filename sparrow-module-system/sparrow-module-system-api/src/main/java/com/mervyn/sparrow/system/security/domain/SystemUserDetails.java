@@ -20,8 +20,8 @@ public class SystemUserDetails implements UserDetails {
     //拥有资源列表
     private final List<SysMenuDTO> menuList;
 
-    public SystemUserDetails(SysUserDTO sysUser, List<SysMenuDTO> menuList) {
-        this.sysUser = sysUser;
+    public SystemUserDetails(SysUserDTO sysUserDTO, List<SysMenuDTO> menuList) {
+        this.sysUser = sysUserDTO;
         this.menuList = menuList;
     }
 

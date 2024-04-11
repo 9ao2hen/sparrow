@@ -9,7 +9,8 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
@@ -30,6 +31,8 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
 
     @Resource
     JwtTokenUtil jwtTokenUtil;
+    @Resource
+    UserDetailsService userDetailsService;
 
     @Override
     protected void doFilterInternal(HttpServletRequest request,
@@ -40,8 +43,9 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
         if (token != null && jwtTokenUtil.validateToken(token)) {
             String username = jwtTokenUtil.getUserNameFromToken(token);
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
-                JwtAuthenticationToken authenticationToken = new JwtAuthenticationToken(username, null, null);
-                authenticationToken.setDetails(new WebAuthenticationDetailsSource().buildDetails(request));
+                UserDetails userDetails = userDetailsService.loadUserByUsername(username);
+                JwtAuthenticationToken authenticationToken = new JwtAuthenticationToken(userDetails.getUsername(), userDetails.getPassword(),userDetails.getAuthorities() );
+                authenticationToken.setDetails(userDetails);
                 SecurityContextHolder.getContext().setAuthentication(authenticationToken);
             }
         } else {

@@ -12,6 +12,7 @@ import com.mervyn.sparrow.system.manager.SysUserManager;
 import com.mervyn.sparrow.system.security.domain.SystemUserDetails;
 import com.mervyn.sparrow.system.service.SysUserService;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -19,6 +20,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -26,6 +28,7 @@ import java.util.List;
  * @date 2024/3/4 20:24
  */
 @Service
+@Slf4j
 public class SysUserServiceImpl implements SysUserService {
 
     @Resource
@@ -53,6 +56,8 @@ public class SysUserServiceImpl implements SysUserService {
         //TODO log
         }catch (AuthenticationException exception){
 //            log.error("登录异常:{}", exception.getMessage());
+            System.out.println("登录异常:"+exception.getMessage());
+            exception.printStackTrace();
         }
         return token;
     }
@@ -110,7 +115,7 @@ public class SysUserServiceImpl implements SysUserService {
         if (sysUser != null) {
             //TODO
 //            List<SysMenuDTO> menuList = getResourceList(admin.getId());
-            List<SysMenuDTO> menuList = null;
+            List<SysMenuDTO> menuList = new ArrayList<>();
             return new SystemUserDetails(sysUser,menuList);
         }
         throw new UsernameNotFoundException("用户名或密码错误");

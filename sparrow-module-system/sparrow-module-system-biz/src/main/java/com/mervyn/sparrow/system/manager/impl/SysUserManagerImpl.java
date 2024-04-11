@@ -2,6 +2,7 @@ package com.mervyn.sparrow.system.manager.impl;
 
 import com.mervyn.sparrow.common.enums.SystemEnum;
 import com.mervyn.sparrow.common.utils.IdGenerator;
+import com.mervyn.sparrow.config.lang.AssertSpr;
 import com.mervyn.sparrow.system.entity.SysUserDTO;
 import com.mervyn.sparrow.system.infrastructure.SysUserConverter;
 import com.mervyn.sparrow.system.manager.SysUserManager;
@@ -26,11 +27,15 @@ public class SysUserManagerImpl implements SysUserManager {
 
     @Override
     public Long createUser(SysUserDTO userDTO) {
+        SysUserDTO byUserName = getUserByUserName(userDTO.getUsername());
+        AssertSpr.isTrue(byUserName == null, "用户名{}已存在",userDTO.getUsername());
         SysUser sysUser = SysUserConverter.INSTANCE.dto2Po(userDTO);
         sysUser.setId(IdGenerator.genId());
         Date now = new Date();
         sysUser.setCreateTime(now);
         sysUser.setUpdateTime(now);
+        sysUser.setStatus(SystemEnum.CommonStatus.enable.getCode());
+        sysUser.setDeleted(SystemEnum.Deleted.UNDELETED.getCode());
         int row = mapper.insertSelective(sysUser);
         return row > 0 ? sysUser.getId() : null;
     }

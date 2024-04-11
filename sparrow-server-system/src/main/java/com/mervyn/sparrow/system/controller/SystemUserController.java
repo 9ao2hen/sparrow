@@ -3,12 +3,13 @@ package com.mervyn.sparrow.system.controller;
 import com.mervyn.sparrow.common.data.domain.Result;
 import com.mervyn.sparrow.common.data.domain.Results;
 import com.mervyn.sparrow.system.entity.SysUserDTO;
-import com.mervyn.sparrow.system.query.SysUserLogin;
+import com.mervyn.sparrow.system.infrastructure.SysUserConverter;
 import com.mervyn.sparrow.system.service.SysUserService;
+import com.mervyn.sparrow.system.view.SysUserVo;
 import jakarta.annotation.Resource;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
@@ -22,17 +23,12 @@ public class SystemUserController {
     @Resource
     SysUserService sysUserService;
 
-
-    @PostMapping("/login")
-    public Result<String> login(@RequestBody SysUserLogin sysUserLogin) {
-        // 登录逻辑
-        String token = sysUserService.login(sysUserLogin.getUsername(), sysUserLogin.getPassword());
-        return Results.success(token);
+    @GetMapping("/info")
+    public Result<SysUserVo> login(@RequestParam String userId) {
+        SysUserDTO userById = sysUserService.getUserById(userId);
+        SysUserVo sysUserVo = SysUserConverter.INSTANCE.dto2Vo(userById);
+        return Results.success(sysUserVo);
     }
 
-    @PostMapping("/register")
-    public Result<String> register(@RequestBody SysUserDTO userDTO) {
-        String user = sysUserService.createUser(userDTO);
-        return Results.success(user);
-    }
+
 }
