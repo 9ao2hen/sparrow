@@ -6,6 +6,7 @@ import com.mervyn.sparrow.system.entity.SysUserDTO;
 import com.mervyn.sparrow.system.query.SysUserLogin;
 import com.mervyn.sparrow.system.service.SysUserService;
 import jakarta.annotation.Resource;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,6 +18,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequestMapping("/system")
+@Slf4j
 public class SystemLoginController {
 
     @Resource
@@ -27,6 +29,7 @@ public class SystemLoginController {
     public Result<String> login(@RequestBody SysUserLogin sysUserLogin) {
         // 登录逻辑
         String token = sysUserService.login(sysUserLogin.getUsername(), sysUserLogin.getPassword());
+        log.info("用户登陆:{}",sysUserLogin.getUsername());
         return Results.success(token);
     }
 

@@ -78,7 +78,7 @@ public class JwtTokenUtil {
      * @return
      */
     public boolean validateToken(String token){
-        return getClaimsFromToken(token) != null || !isTokenExpired(token);
+        return getClaimsFromToken(token) != null && !isTokenExpired(token);
     }
 
     public String generateRefreshToken(UserDetails userDetails) {

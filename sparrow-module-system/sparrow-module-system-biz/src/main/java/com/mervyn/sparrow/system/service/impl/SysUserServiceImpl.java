@@ -3,7 +3,7 @@ package com.mervyn.sparrow.system.service.impl;
 import cn.hutool.core.util.StrUtil;
 import com.mervyn.sparrow.common.enums.SystemEnum;
 import com.mervyn.sparrow.config.util.Exps;
-import com.mervyn.sparrow.framework.security.JwtAuthenticationToken;
+import com.mervyn.sparrow.framework.security.token.JwtAuthenticationToken;
 import com.mervyn.sparrow.framework.security.util.JwtTokenUtil;
 import com.mervyn.sparrow.system.constant.SystemUserConstant;
 import com.mervyn.sparrow.system.entity.SysMenuDTO;
@@ -31,6 +31,8 @@ import java.util.List;
 @Slf4j
 public class SysUserServiceImpl implements SysUserService {
 
+//    private static final Logger log = LoggerFactory.getLogger(SysUserServiceImpl.class);
+
     @Resource
     SysUserManager userManager;
     @Resource
@@ -40,31 +42,28 @@ public class SysUserServiceImpl implements SysUserService {
 
 
     @Override
-    public String login(String username, String password){
+    public String login(String username, String password) {
         String token = "";
         try {
             UserDetails userDetails = loadUserByUsername(username);
-            if(!passwordEncoder.matches(password,userDetails.getPassword())){
+            if (!passwordEncoder.matches(password, userDetails.getPassword())) {
                 Exps.fail("密码错误");
             }
-            if(!userDetails.isEnabled()){
+            if (!userDetails.isEnabled()) {
                 Exps.fail("帐号已被禁用");
             }
             JwtAuthenticationToken authentication = new JwtAuthenticationToken(userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
             token = jwtTokenUtil.generateToken(userDetails);
-        //TODO log
-        }catch (AuthenticationException exception){
-//            log.error("登录异常:{}", exception.getMessage());
-            System.out.println("登录异常:"+exception.getMessage());
-            exception.printStackTrace();
+        } catch (AuthenticationException exception) {
+            log.error("登录异常:{}", exception.getMessage());
         }
         return token;
     }
 
     @Override
     public String createUser(SysUserDTO userDTO) {
-        String password = StrUtil.isNotBlank(userDTO.getPassword())? userDTO.getPassword():SystemUserConstant.ADMIN_DEFAULT_PASSWORD;
+        String password = StrUtil.isNotBlank(userDTO.getPassword()) ? userDTO.getPassword() : SystemUserConstant.ADMIN_DEFAULT_PASSWORD;
         String encodePsd = passwordEncoder.encode(password);
         userDTO.setPassword(encodePsd);
         Long userId = userManager.createUser(userDTO);
@@ -102,6 +101,7 @@ public class SysUserServiceImpl implements SysUserService {
     public SysUserDTO getUserByUserName(String username) {
         return userManager.getUserByUserName(username);
     }
+
     @Override
     public List<SysUserDTO> getList(SysUserDTO userDTO) {
         List<SysUserDTO> list = userManager.getList(userDTO);
@@ -109,14 +109,14 @@ public class SysUserServiceImpl implements SysUserService {
     }
 
     @Override
-    public UserDetails loadUserByUsername(String username){
+    public UserDetails loadUserByUsername(String username) {
         //获取用户信息
         SysUserDTO sysUser = getUserByUserName(username);
         if (sysUser != null) {
             //TODO
 //            List<SysMenuDTO> menuList = getResourceList(admin.getId());
             List<SysMenuDTO> menuList = new ArrayList<>();
-            return new SystemUserDetails(sysUser,menuList);
+            return new SystemUserDetails(sysUser, menuList);
         }
         throw new UsernameNotFoundException("用户名或密码错误");
     }

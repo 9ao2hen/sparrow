@@ -1,5 +1,8 @@
 package com.mervyn.sparrow.framework.security.config;
 
+import com.mervyn.sparrow.framework.security.filter.JwtAuthenticationFilter;
+import com.mervyn.sparrow.framework.security.hadler.RestAuthenticationEntryPoint;
+import com.mervyn.sparrow.framework.security.hadler.RestfulAccessDeniedHandler;
 import jakarta.annotation.Resource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,8 +41,9 @@ public class SparrowSecurityConfig {
         http.csrf(AbstractHttpConfigurer::disable)
                 .httpBasic(AbstractHttpConfigurer::disable)
                 .formLogin(AbstractHttpConfigurer::disable)
-                .authorizeHttpRequests(authorize ->
-                        authorize.requestMatchers(urls.toArray(new String[0])).permitAll()
+                .authorizeHttpRequests(authorize ->authorize
+                        .requestMatchers("/test/error").permitAll()
+//                      .requestMatchers(urls.toArray(new String[0])).permitAll()
                                 .anyRequest().authenticated())
                 .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS))
                 .exceptionHandling(exception -> exception.authenticationEntryPoint(restAuthenticationEntryPoint).accessDeniedHandler(restfulAccessDeniedHandler))

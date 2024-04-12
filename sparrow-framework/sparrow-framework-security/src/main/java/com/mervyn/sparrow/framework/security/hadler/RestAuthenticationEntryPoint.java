@@ -1,4 +1,4 @@
-package com.mervyn.sparrow.framework.security.config;
+package com.mervyn.sparrow.framework.security.hadler;
 
 import cn.hutool.json.JSONUtil;
 import com.mervyn.sparrow.common.data.domain.Results;
