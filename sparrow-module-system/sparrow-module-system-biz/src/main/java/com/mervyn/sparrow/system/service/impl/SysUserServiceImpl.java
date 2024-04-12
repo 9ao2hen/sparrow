@@ -3,7 +3,7 @@ package com.mervyn.sparrow.system.service.impl;
 import cn.hutool.core.util.StrUtil;
 import com.mervyn.sparrow.common.enums.SystemEnum;
 import com.mervyn.sparrow.config.util.Exps;
-import com.mervyn.sparrow.framework.security.JwtAuthenticationToken;
+import com.mervyn.sparrow.framework.security.token.JwtAuthenticationToken;
 import com.mervyn.sparrow.framework.security.util.JwtTokenUtil;
 import com.mervyn.sparrow.system.constant.SystemUserConstant;
 import com.mervyn.sparrow.system.entity.SysMenuDTO;
@@ -12,8 +12,7 @@ import com.mervyn.sparrow.system.manager.SysUserManager;
 import com.mervyn.sparrow.system.security.domain.SystemUserDetails;
 import com.mervyn.sparrow.system.service.SysUserService;
 import jakarta.annotation.Resource;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -29,9 +28,10 @@ import java.util.List;
  * @date 2024/3/4 20:24
  */
 @Service
+@Slf4j
 public class SysUserServiceImpl implements SysUserService {
 
-    private static final Logger log = LoggerFactory.getLogger(SysUserServiceImpl.class);
+//    private static final Logger log = LoggerFactory.getLogger(SysUserServiceImpl.class);
 
     @Resource
     SysUserManager userManager;
@@ -55,11 +55,8 @@ public class SysUserServiceImpl implements SysUserService {
             JwtAuthenticationToken authentication = new JwtAuthenticationToken(userDetails.getUsername(), userDetails.getPassword(), userDetails.getAuthorities());
             SecurityContextHolder.getContext().setAuthentication(authentication);
             token = jwtTokenUtil.generateToken(userDetails);
-            //TODO log
         } catch (AuthenticationException exception) {
             log.error("登录异常:{}", exception.getMessage());
-            System.out.println("登录异常:" + exception.getMessage());
-            exception.printStackTrace();
         }
         return token;
     }

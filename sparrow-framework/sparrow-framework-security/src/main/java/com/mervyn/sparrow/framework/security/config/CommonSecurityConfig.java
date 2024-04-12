@@ -16,9 +16,4 @@ public class CommonSecurityConfig {
     public PasswordEncoder passwordEncoder() {
         return new BCryptPasswordEncoder();
     }
-
-//    @Bean
-//    public IgnoreUrlsConfig ignoreUrlsConfig() {
-//        return new IgnoreUrlsConfig();
-//    }
 }

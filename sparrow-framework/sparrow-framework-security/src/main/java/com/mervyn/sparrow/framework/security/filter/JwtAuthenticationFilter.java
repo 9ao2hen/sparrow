@@ -1,6 +1,6 @@
-package com.mervyn.sparrow.framework.security.config;
+package com.mervyn.sparrow.framework.security.filter;
 
-import com.mervyn.sparrow.framework.security.JwtAuthenticationToken;
+import com.mervyn.sparrow.framework.security.token.JwtAuthenticationToken;
 import com.mervyn.sparrow.framework.security.util.JwtTokenUtil;
 import jakarta.annotation.Resource;
 import jakarta.servlet.FilterChain;
@@ -39,7 +39,6 @@ public class JwtAuthenticationFilter extends OncePerRequestFilter {
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
         String token = getHeaderToken(request);
-
         if (token != null && jwtTokenUtil.validateToken(token)) {
             String username = jwtTokenUtil.getUserNameFromToken(token);
             if (username != null && SecurityContextHolder.getContext().getAuthentication() == null) {
