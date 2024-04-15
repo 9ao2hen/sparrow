@@ -24,7 +24,7 @@ public class RestAuthenticationEntryPoint implements AuthenticationEntryPoint {
         response.setCharacterEncoding("UTF-8");
         response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
         response.setContentType("application/json");
-        response.getWriter().println(JSONUtil.parse(Results.error(authException.getMessage())));
+        response.getWriter().println(JSONUtil.parse(Results.error("token过期，请重新登陆")));
         response.getWriter().flush();
     }
 }
