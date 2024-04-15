@@ -2,7 +2,6 @@ package com.mervyn.sparrow.system.entity;
 
 
 /**
- * 
  * @TableName sys_menu
  */
 public class SysMenuDTO {
@@ -61,7 +60,7 @@ public class SysMenuDTO {
     private Boolean deleted;
 
     /**
-     * 
+     *
      */
     private String remark;
 

@@ -2,6 +2,7 @@ package com.mervyn.sparrow.system.infrastructure;
 
 import com.mervyn.sparrow.system.entity.SysMenuDTO;
 import com.mervyn.sparrow.system.model.SysMenu;
+import com.mervyn.sparrow.system.query.MenuQuery;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 
@@ -24,6 +25,10 @@ public interface SysMenuConverter {
 
     SysMenu dto2Po(SysMenuDTO dto);
     List<SysMenu> dto2Po(List<SysMenuDTO> dto);
+
+
+    SysMenuDTO vo2Dto(MenuQuery menu);
+    List<SysMenuDTO> vo2Dto(List<MenuQuery> menu);
 
 
 }
