@@ -1,6 +1,8 @@
 package com.mervyn.sparrow.system.service.impl;
 
+import com.mervyn.sparrow.system.manager.SysRoleManager;
 import com.mervyn.sparrow.system.service.SysRoleService;
+import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
 /**
@@ -9,4 +11,11 @@ import org.springframework.stereotype.Service;
  */
 @Service
 public class SysRoleServiceImpl implements SysRoleService {
+
+
+    @Resource
+    SysRoleManager roleManager;
+
+
+
 }
