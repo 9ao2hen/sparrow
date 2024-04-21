@@ -145,4 +145,13 @@
             order by sort asc
         </if>
     </select>
+
+    <select id="getListByIds" resultMap="BaseResultMap">
+        select *
+        from sys_role
+        where id in
+        <foreach close=")" collection="list" item="listItem" open="(" separator=",">
+            #{listItem}
+        </foreach>
+    </select>
 </mapper>

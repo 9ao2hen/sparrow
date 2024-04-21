@@ -4,11 +4,17 @@ import cn.hutool.core.lang.Assert;
 import com.mervyn.sparrow.common.enums.SystemEnum;
 import com.mervyn.sparrow.common.utils.IdGenerator;
 import com.mervyn.sparrow.config.lang.AssertSpr;
+import com.mervyn.sparrow.system.entity.SysRoleDTO;
+import com.mervyn.sparrow.system.infrastructure.SysRoleConverter;
 import com.mervyn.sparrow.system.manager.SysRoleManager;
+import com.mervyn.sparrow.system.mapper.SysMenuMapper;
 import com.mervyn.sparrow.system.mapper.SysRoleMapper;
+import com.mervyn.sparrow.system.mapper.SysRoleMenuMapper;
 import com.mervyn.sparrow.system.model.SysRole;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
+
+import java.util.List;
 
 /**
  * @author 2hen9ao
@@ -20,6 +26,10 @@ public class SysRoleManagerImpl implements SysRoleManager {
 
     @Resource
     SysRoleMapper mapper;
+    @Resource
+    SysMenuMapper menuMapper;
+    @Resource
+    SysRoleMenuMapper roleMenuMapper;
 
 
     @Override
@@ -48,8 +58,9 @@ public class SysRoleManagerImpl implements SysRoleManager {
     }
 
     @Override
-    public SysRole selectById(Long id) {
-        return mapper.selectById(id);
+    public SysRoleDTO selectById(Long id) {
+        SysRole sysRole = mapper.selectById(id);
+        return SysRoleConverter.INSTANCE.po2Dto(sysRole);
     }
 
     @Override
@@ -63,6 +74,15 @@ public class SysRoleManagerImpl implements SysRoleManager {
         AssertSpr.notNull(role.getId(),"id 不能为空");
         return mapper.updateById(role);
     }
+
+    @Override
+    public List<SysRoleDTO> getRoleList(SysRole role){
+        List<SysRole> roleList = mapper.getList(role);
+        return SysRoleConverter.INSTANCE.po2Dto(roleList);
+    }
+
+
+
 
 
 

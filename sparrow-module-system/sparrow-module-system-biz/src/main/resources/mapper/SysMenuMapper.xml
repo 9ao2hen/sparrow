@@ -236,4 +236,20 @@
         </if>
         order by update_time desc
     </select>
+
+    <select id="getListByIds" resultMap="BaseResultMap">
+        select *
+        from sys_menu
+        where id in
+        <foreach close=")" collection="list" item="listItem" open="(" separator=",">
+            #{listItem}
+        </foreach>
+    </select>
+
+    <select id="getByCode" resultMap="BaseResultMap">
+        select *
+        from sys_menu
+        where deleted = false
+        and path = #{path}
+    </select>
 </mapper>

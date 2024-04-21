@@ -3,6 +3,8 @@ package com.mervyn.sparrow.system.mapper;
 import com.mervyn.sparrow.system.model.SysRoleMenu;
 import org.apache.ibatis.annotations.Mapper;
 
+import java.util.List;
+
 /**
 * @author 2hen9ao
 * @description 针对表【sys_role_menu】的数据库操作Mapper
@@ -23,5 +25,8 @@ public interface SysRoleMenuMapper {
     int updateByIdSelective(SysRoleMenu roleMenu);
 
     int updateById(SysRoleMenu roleMenu);
+
+    List<SysRoleMenu> getMenuByRoleId(Long roleId);
+
 
 }

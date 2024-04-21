@@ -3,6 +3,8 @@ package com.mervyn.sparrow.system.entity;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.util.List;
+
 /**
  * 
  * @TableName sys_role
@@ -44,5 +46,7 @@ public class SysRoleDTO {
      * 删除状态（0正常 1删除）
      */
     private String deleted;
+
+    List<SysMenuDTO> sysMenuDTOList;
 
 }

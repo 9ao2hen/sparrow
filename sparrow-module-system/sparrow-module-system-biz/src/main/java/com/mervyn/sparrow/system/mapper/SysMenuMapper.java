@@ -28,5 +28,7 @@ public interface SysMenuMapper {
 
     List<SysMenu> selectList(SysMenu param);
 
+    List<SysMenu> getListByIds(List<Long> ids);
 
+    SysMenu getByCode(String path);
 }

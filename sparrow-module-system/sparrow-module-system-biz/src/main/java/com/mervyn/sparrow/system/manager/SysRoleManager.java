@@ -1,6 +1,9 @@
 package com.mervyn.sparrow.system.manager;
 
+import com.mervyn.sparrow.system.entity.SysRoleDTO;
 import com.mervyn.sparrow.system.model.SysRole;
+
+import java.util.List;
 
 /**
  * @author 2hen9ao
@@ -14,9 +17,11 @@ public interface SysRoleManager {
 
     int insertSelective(SysRole record);
 
-    SysRole selectById(Long id);
+    SysRoleDTO selectById(Long id);
 
     int updateByIdSelective(SysRole record);
 
     int updateById(SysRole record);
+
+    List<SysRoleDTO> getRoleList(SysRole role);
 }
