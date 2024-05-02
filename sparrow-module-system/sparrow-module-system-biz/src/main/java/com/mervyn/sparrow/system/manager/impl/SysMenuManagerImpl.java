@@ -60,8 +60,7 @@ public class SysMenuManagerImpl implements SysMenuManager {
 
     @Override
     public SysMenu getById(Long id){
-        SysMenu sysMenu = mapper.selectByPrimaryKey(id);
-        return sysMenu;
+        return mapper.selectByPrimaryKey(id);
     }
 
     public SysMenu getByPath(String path){
@@ -73,6 +72,13 @@ public class SysMenuManagerImpl implements SysMenuManager {
     public List<SysMenu> selectMenu(SysMenu menu){
         return mapper.selectList(menu);
     }
+
+    @Override
+    public List<SysMenu> getMenuByRole(String roleId){
+        //TODO
+        return null;
+    }
+
 
 
 }

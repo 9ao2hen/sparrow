@@ -19,4 +19,6 @@ public interface SysMenuManager {
     SysMenu getById(Long id);
 
     List<SysMenu> selectMenu(SysMenu menu);
+
+    List<SysMenu> getMenuByRole(String roleId);
 }
