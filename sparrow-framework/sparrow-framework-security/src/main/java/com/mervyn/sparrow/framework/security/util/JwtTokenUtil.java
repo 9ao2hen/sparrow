@@ -4,6 +4,7 @@ import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Component;
 
@@ -142,5 +143,19 @@ public class JwtTokenUtil {
     private Date getExpiredDateFromToken(String token) {
         Claims claims = getClaimsFromToken(token);
         return claims.getExpiration();
+    }
+
+    public String getToken(Authentication authentication) {
+        UserDetails userDetails = (UserDetails) authentication.getPrincipal();
+        if (userDetails != null) {
+            return generateToken(userDetails);
+        }
+        return null;
+    }
+
+    public void expireToken(String token) {
+        Claims claims = getClaimsFromToken(token);
+        claims.setExpiration(new Date());
+        token = generateToken(claims);
     }
 }

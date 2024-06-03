@@ -61,6 +61,15 @@ public class SysUserServiceImpl implements SysUserService {
         return token;
     }
 
+    //退出登录，并且将 jwt 设置为过期
+    @Override
+    public String logout() {
+        String token = jwtTokenUtil.getToken(SecurityContextHolder.getContext().getAuthentication());
+        jwtTokenUtil.expireToken(token);
+        return token;
+    }
+
+
     @Override
     public String createUser(SysUserDTO userDTO) {
         String password = StrUtil.isNotBlank(userDTO.getPassword()) ? userDTO.getPassword() : SystemUserConstant.ADMIN_DEFAULT_PASSWORD;

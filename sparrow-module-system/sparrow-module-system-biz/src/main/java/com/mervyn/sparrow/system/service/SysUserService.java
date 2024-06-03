@@ -13,6 +13,9 @@ public interface SysUserService {
 
     String login(String username, String password);
 
+    //退出登录，并且将 jwt 设置为过期
+    String logout();
+
     String createUser(SysUserDTO userDTO);
 
     SysUserDTO updateUser(SysUserDTO userDTO);
