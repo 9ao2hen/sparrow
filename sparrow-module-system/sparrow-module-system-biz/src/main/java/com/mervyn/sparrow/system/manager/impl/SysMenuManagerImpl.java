@@ -75,7 +75,10 @@ public class SysMenuManagerImpl implements SysMenuManager {
 
     @Override
     public List<SysMenu> getMenuByRole(String roleId){
-        //TODO
+        //todo 根据角色获取菜单
+
+
+
         return null;
     }
 

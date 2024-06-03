@@ -33,9 +33,19 @@ public class SystemLoginController {
         return Results.success(token);
     }
 
-    @PostMapping("/register")
-    public Result<String> register(@RequestBody SysUserDTO userDTO) {
+    @PostMapping("/signup")
+    public Result<String> signup(@RequestBody SysUserDTO userDTO) {
         String user = sysUserService.createUser(userDTO);
         return Results.success(user);
     }
+
+    @PostMapping("/logout")
+    public Result<String> logout() {
+        String token = sysUserService.logout();
+        return Results.success("token");
+    }
+
+
+
+
 }
