@@ -23,12 +23,12 @@ public class SystemUserController {
     @Resource
     SysUserService sysUserService;
 
-    @GetMapping("/info")
-    public Result<SysUserVo> login(@RequestParam("userId") String userId) {
+    @GetMapping("/detail")
+    public Result<SysUserVo> detail(@RequestParam("userId") String userId) {
+
         SysUserDTO userById = sysUserService.getUserById(userId);
         SysUserVo sysUserVo = SysUserConverter.INSTANCE.dto2Vo(userById);
         return Results.success(sysUserVo);
     }
-
 
 }
