@@ -2,7 +2,7 @@ package com.mervyn.sparrow.system.infrastructure;
 
 import com.mervyn.sparrow.system.entity.SysMenuDTO;
 import com.mervyn.sparrow.system.model.SysMenu;
-import com.mervyn.sparrow.system.query.MenuQuery;
+import com.mervyn.sparrow.system.param.MenuQuery;
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
 

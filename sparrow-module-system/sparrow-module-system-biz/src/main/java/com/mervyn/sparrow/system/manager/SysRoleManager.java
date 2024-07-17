@@ -24,4 +24,6 @@ public interface SysRoleManager {
     int updateById(SysRole record);
 
     List<SysRoleDTO> getRoleList(SysRole role);
+
+    Integer disableRole(String roleId);
 }

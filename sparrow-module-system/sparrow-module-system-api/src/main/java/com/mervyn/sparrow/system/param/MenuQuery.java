@@ -1,4 +1,4 @@
-package com.mervyn.sparrow.system.query;
+package com.mervyn.sparrow.system.param;
 
 import lombok.Getter;
 import lombok.Setter;

@@ -13,7 +13,7 @@ mybatis:
 
 jwt:
   token-header: Authorization
-  token-prefix: "'Bearer '"
+  token-prefix: "Bearer "
   secret: sparrow-secret
   expiration: "86400"
 

@@ -4,7 +4,7 @@ import com.mervyn.sparrow.common.data.domain.Result;
 import com.mervyn.sparrow.common.data.domain.Results;
 import com.mervyn.sparrow.system.entity.SysMenuDTO;
 import com.mervyn.sparrow.system.infrastructure.SysMenuConverter;
-import com.mervyn.sparrow.system.query.MenuQuery;
+import com.mervyn.sparrow.system.param.MenuQuery;
 import com.mervyn.sparrow.system.service.SysMenuService;
 import jakarta.annotation.Resource;
 import org.springframework.web.bind.annotation.*;

@@ -1,4 +1,4 @@
-package com.mervyn.sparrow.system.query;
+package com.mervyn.sparrow.system.param;
 
 /**
  * @author 2hen9ao
