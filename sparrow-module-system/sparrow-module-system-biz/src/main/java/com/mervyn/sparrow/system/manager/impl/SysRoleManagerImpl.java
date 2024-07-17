@@ -81,10 +81,11 @@ public class SysRoleManagerImpl implements SysRoleManager {
         return SysRoleConverter.INSTANCE.po2Dto(roleList);
     }
 
-
-
-
-
+    @Override
+    public Integer disableRole(String roleId) {
+        //todo
+        return null;
+    }
 
 
 }

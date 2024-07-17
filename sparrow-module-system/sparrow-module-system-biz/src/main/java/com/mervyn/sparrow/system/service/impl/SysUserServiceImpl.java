@@ -1,6 +1,8 @@
 package com.mervyn.sparrow.system.service.impl;
 
 import cn.hutool.core.util.StrUtil;
+import com.github.pagehelper.PageInfo;
+import com.mervyn.sparrow.common.data.domain.PageResult;
 import com.mervyn.sparrow.common.enums.SystemEnum;
 import com.mervyn.sparrow.config.util.Exps;
 import com.mervyn.sparrow.framework.security.token.JwtAuthenticationToken;
@@ -8,7 +10,10 @@ import com.mervyn.sparrow.framework.security.util.JwtTokenUtil;
 import com.mervyn.sparrow.system.constant.SystemUserConstant;
 import com.mervyn.sparrow.system.entity.SysMenuDTO;
 import com.mervyn.sparrow.system.entity.SysUserDTO;
+import com.mervyn.sparrow.system.infrastructure.SysUserConverter;
 import com.mervyn.sparrow.system.manager.SysUserManager;
+import com.mervyn.sparrow.system.param.SysUserAddReq;
+import com.mervyn.sparrow.system.param.SysUserQuery;
 import com.mervyn.sparrow.system.security.domain.SystemUserDetails;
 import com.mervyn.sparrow.system.service.SysUserService;
 import jakarta.annotation.Resource;
@@ -71,11 +76,12 @@ public class SysUserServiceImpl implements SysUserService {
 
 
     @Override
-    public String createUser(SysUserDTO userDTO) {
-        String password = StrUtil.isNotBlank(userDTO.getPassword()) ? userDTO.getPassword() : SystemUserConstant.ADMIN_DEFAULT_PASSWORD;
+    public String createUser(SysUserAddReq addReq) {
+        String password = StrUtil.isNotBlank(addReq.getPassword()) ? addReq.getPassword() : SystemUserConstant.ADMIN_DEFAULT_PASSWORD;
         String encodePsd = passwordEncoder.encode(password);
-        userDTO.setPassword(encodePsd);
-        Long userId = userManager.createUser(userDTO);
+        SysUserDTO sysUserDTO = SysUserConverter.INSTANCE.addReq2Dto(addReq);
+        sysUserDTO.setPassword(encodePsd);
+        Long userId = userManager.createUser(sysUserDTO);
         return userId != null ? String.valueOf(userId) : null;
     }
 
@@ -114,7 +120,13 @@ public class SysUserServiceImpl implements SysUserService {
     @Override
     public List<SysUserDTO> getList(SysUserDTO userDTO) {
         List<SysUserDTO> list = userManager.getList(userDTO);
+        new PageInfo<>(list);
         return list;
+    }
+
+    @Override
+    public PageResult<SysUserDTO> getPage(SysUserQuery query) {
+        return userManager.getPage(query);
     }
 
     @Override

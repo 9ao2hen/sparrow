@@ -2,6 +2,7 @@ package com.mervyn.sparrow.system.mapper;
 
 
 import com.mervyn.sparrow.system.model.SysUser;
+import com.mervyn.sparrow.system.param.SysUserQuery;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -28,6 +29,8 @@ public interface SysUserMapper {
     int updateByPrimaryKey(SysUser record);
 
     List<SysUser> selectList(SysUser user);
+
+    List<SysUser> selectPage(SysUserQuery user);
 
     SysUser selectByUsername(String username);
 }

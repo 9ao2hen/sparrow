@@ -1,7 +1,9 @@
 package com.mervyn.sparrow.system.manager;
 
+import com.mervyn.sparrow.common.data.domain.PageResult;
 import com.mervyn.sparrow.common.enums.SystemEnum;
 import com.mervyn.sparrow.system.entity.SysUserDTO;
+import com.mervyn.sparrow.system.param.SysUserQuery;
 
 import java.util.List;
 
@@ -24,4 +26,5 @@ public interface SysUserManager {
 
     List<SysUserDTO> getList(SysUserDTO userDTO);
 
+    PageResult<SysUserDTO> getPage(SysUserQuery query);
 }

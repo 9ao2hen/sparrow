@@ -16,6 +16,24 @@ public class SysRoleServiceImpl implements SysRoleService {
     @Resource
     SysRoleManager roleManager;
 
+    public Integer disableRole(String roleId) {
+        return roleManager.disableRole(roleId);
+    }
+
+    public Integer deleteRole(String roleId) {
+        return roleManager.deleteById(Long.valueOf(roleId));
+    }
+
+    /**
+     * 获取角色的所有菜单
+     */
+    public String getRoleMenu(String roleId) {
+        //todo 获取角色的所有菜单
+
+        return null;
+    }
+
+
 
 
 }

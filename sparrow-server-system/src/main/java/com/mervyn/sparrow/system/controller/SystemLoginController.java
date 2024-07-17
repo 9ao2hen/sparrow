@@ -2,8 +2,7 @@ package com.mervyn.sparrow.system.controller;
 
 import com.mervyn.sparrow.common.data.domain.Result;
 import com.mervyn.sparrow.common.data.domain.Results;
-import com.mervyn.sparrow.system.entity.SysUserDTO;
-import com.mervyn.sparrow.system.query.SysUserLogin;
+import com.mervyn.sparrow.system.param.SysUserLogin;
 import com.mervyn.sparrow.system.service.SysUserService;
 import jakarta.annotation.Resource;
 import lombok.extern.slf4j.Slf4j;
@@ -33,11 +32,11 @@ public class SystemLoginController {
         return Results.success(token);
     }
 
-    @PostMapping("/signup")
-    public Result<String> signup(@RequestBody SysUserDTO userDTO) {
-        String user = sysUserService.createUser(userDTO);
-        return Results.success(user);
-    }
+//    @PostMapping("/signup")
+//    public Result<String> signup(@RequestBody SysUserDTO userDTO) {
+//        String user = sysUserService.createUser(userDTO);
+//        return Results.success(user);
+//    }
 
     @PostMapping("/logout")
     public Result<String> logout() {

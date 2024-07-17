@@ -7,13 +7,20 @@ spring:
 
 mybatis:
   mapper-locations: classpath*:mapper/*Mapper.xml
-#  打印 mybatis log
+  #  打印 mybatis log
   configuration:
     log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
+    map-underscore-to-camel-case: true
+
+pagehelper:
+  helper-dialect: mysql
+  reasonable: true
+  support-methods-arguments: true
+  params: count=countSql
 
 jwt:
   token-header: Authorization
-  token-prefix: "'Bearer '"
+  token-prefix: "Bearer "
   secret: sparrow-secret
   expiration: "86400"
 

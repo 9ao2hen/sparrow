@@ -1,6 +1,9 @@
 package com.mervyn.sparrow.system.service;
 
+import com.mervyn.sparrow.common.data.domain.PageResult;
 import com.mervyn.sparrow.system.entity.SysUserDTO;
+import com.mervyn.sparrow.system.param.SysUserAddReq;
+import com.mervyn.sparrow.system.param.SysUserQuery;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.List;
@@ -16,7 +19,7 @@ public interface SysUserService {
     //退出登录，并且将 jwt 设置为过期
     String logout();
 
-    String createUser(SysUserDTO userDTO);
+    String createUser(SysUserAddReq addReq);
 
     SysUserDTO updateUser(SysUserDTO userDTO);
 
@@ -31,6 +34,8 @@ public interface SysUserService {
     SysUserDTO getUserByUserName(String username);
 
     List<SysUserDTO> getList(SysUserDTO userDTO);
+
+    PageResult<SysUserDTO> getPage(SysUserQuery query);
 
     UserDetails loadUserByUsername(String username);
 }
