@@ -1,5 +1,9 @@
 package com.mervyn.sparrow.system.manager.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.mervyn.sparrow.common.data.domain.PageResult;
+import com.mervyn.sparrow.common.data.domain.Pages;
 import com.mervyn.sparrow.common.enums.SystemEnum;
 import com.mervyn.sparrow.common.utils.IdGenerator;
 import com.mervyn.sparrow.config.lang.AssertSpr;
@@ -8,6 +12,7 @@ import com.mervyn.sparrow.system.infrastructure.SysUserConverter;
 import com.mervyn.sparrow.system.manager.SysUserManager;
 import com.mervyn.sparrow.system.mapper.SysUserMapper;
 import com.mervyn.sparrow.system.model.SysUser;
+import com.mervyn.sparrow.system.param.SysUserQuery;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -85,6 +90,17 @@ public class SysUserManagerImpl implements SysUserManager {
         List<SysUser> userList = mapper.selectList(sysUser);
         return SysUserConverter.INSTANCE.po2Dto(userList);
     }
+
+    @Override
+    public PageResult<SysUserDTO> getPage(SysUserQuery query) {
+        PageHelper.startPage(query.getPageNumber(),query.getPageSize());
+        List<SysUser> userList = mapper.selectPage(query);
+        PageInfo<SysUser> pageInfo = new PageInfo<>(userList);
+        List<SysUserDTO> list = SysUserConverter.INSTANCE.po2Dto(userList);
+        PageResult<SysUserDTO> pageResult = Pages.of(list, pageInfo.getPageSize(), pageInfo.getPageNum(), pageInfo.getTotal());
+        return pageResult;
+    }
+
 
 
 }

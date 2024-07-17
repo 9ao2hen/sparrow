@@ -28,6 +28,7 @@ public interface SystemEnum {
     }
 
     enum CommonStatus {
+        unknown("0", "未知"),
         enable("1", "正常"),
         disable("2", "禁用");
 
@@ -45,6 +46,16 @@ public interface SystemEnum {
 
         public String getDesc() {
             return desc;
+        }
+
+
+        public static String getDesc(String code) {
+            for (CommonStatus status : CommonStatus.values()) {
+                if (status.getCode().equals(code)) {
+                    return status.getDesc();
+                }
+            }
+            return unknown.getDesc();
         }
     }
 
@@ -71,5 +82,40 @@ public interface SystemEnum {
         public String getDesc() {
             return desc;
         }
+    }
+
+    /**
+     * 性别
+     */
+    enum GENDER {
+        unknown(0, "未知"),
+        male(1, "男"),
+        female(2, "女");
+
+        final int code;
+        final String desc;
+
+        GENDER(int code, String desc) {
+            this.code = code;
+            this.desc = desc;
+        }
+
+        public int getCode() {
+            return code;
+        }
+
+        public String getDesc() {
+            return desc;
+        }
+
+        public static String getDesc(int code) {
+            for (GENDER gender : GENDER.values()) {
+                if (gender.getCode() == code) {
+                    return gender.getDesc();
+                }
+            }
+            return unknown.getDesc();
+        }
+
     }
 }
