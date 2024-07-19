@@ -62,7 +62,7 @@ public class SystemUserController {
     }
 
     @GetMapping("/page")
-    public Result<PageResult> list(@RequestBody SysUserQuery query) {
+    public Result<PageResult<SysUserVo>> list(@RequestBody SysUserQuery query) {
         PageResult<SysUserDTO> page = sysUserService.getPage(query);
         List<SysUserVo> voList = SysUserConverter.INSTANCE.dto2Vo(page.getList());
         return Results.success(Pages.of(voList,page.getPageSize(), page.getPageNum(), page.getTotal()));

@@ -87,8 +87,7 @@ public class SysUserServiceImpl implements SysUserService {
 
     @Override
     public SysUserDTO updateUser(SysUserDTO userDTO) {
-        SysUserDTO sysUserDTO = userManager.updateUser(userDTO);
-        return sysUserDTO;
+        return userManager.updateUser(userDTO);
     }
 
     @Override

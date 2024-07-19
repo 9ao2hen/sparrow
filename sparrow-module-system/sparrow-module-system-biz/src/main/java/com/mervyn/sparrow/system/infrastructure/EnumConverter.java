@@ -17,4 +17,9 @@ public class EnumConverter {
         return SystemEnum.CommonStatus.getDesc(status);
     }
 
+    @Named("menuTypeMapping")
+    public String menuTypeMapping(String type) {
+        return SystemEnum.MenuType.getDesc(type);
+    }
+
 }

@@ -1,11 +1,15 @@
 package com.mervyn.sparrow.system.service.impl;
 
+import cn.hutool.core.util.StrUtil;
+import com.mervyn.sparrow.common.data.domain.PageResult;
 import com.mervyn.sparrow.common.enums.SystemEnum;
 import com.mervyn.sparrow.common.utils.IdGenerator;
 import com.mervyn.sparrow.system.entity.SysMenuDTO;
 import com.mervyn.sparrow.system.infrastructure.SysMenuConverter;
 import com.mervyn.sparrow.system.manager.SysMenuManager;
 import com.mervyn.sparrow.system.model.SysMenu;
+import com.mervyn.sparrow.system.param.MenuQuery;
+import com.mervyn.sparrow.system.param.SysMenuEditReq;
 import com.mervyn.sparrow.system.service.SysMenuService;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
@@ -31,6 +35,9 @@ public class SysMenuServiceImpl implements SysMenuService {
     @Override
     public String createMenu(SysMenuDTO menuDTO) {
         menuDTO.setId(IdGenerator.genIdStr());
+        if (StrUtil.isBlank(menuDTO.getParentId())) {
+            menuDTO.setParentId("0");
+        }
         Long id = manager.add(menuDTO);
         return String.valueOf(id);
     }
@@ -42,7 +49,8 @@ public class SysMenuServiceImpl implements SysMenuService {
      * @return
      */
     @Override
-    public SysMenuDTO modifyMenu(SysMenuDTO menuDTO) {
+    public SysMenuDTO modifyMenu(SysMenuEditReq editReq) {
+        SysMenuDTO menuDTO = SysMenuConverter.INSTANCE.editReq2Dto(editReq);
         Long update = manager.update(menuDTO);
         return update != null ? menuDTO : null;
     }
@@ -89,6 +97,17 @@ public class SysMenuServiceImpl implements SysMenuService {
         sysMenu.setParentId(Long.valueOf(parentId));
         List<SysMenu> menuList = manager.selectMenu(sysMenu);
         return SysMenuConverter.INSTANCE.po2Dto(menuList);
+    }
+
+    @Override
+    public List<SysMenuDTO> getAllMenu() {
+        List<SysMenu> menuList = manager.selectMenu(new SysMenu());
+        return SysMenuConverter.INSTANCE.po2Dto(menuList);
+    }
+
+    @Override
+    public PageResult<SysMenuDTO> getPage(MenuQuery query) {
+        return manager.getPage(query);
     }
 
 
