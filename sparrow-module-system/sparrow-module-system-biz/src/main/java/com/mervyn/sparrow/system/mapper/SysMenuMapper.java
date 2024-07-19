@@ -1,6 +1,7 @@
 package com.mervyn.sparrow.system.mapper;
 
 import com.mervyn.sparrow.system.model.SysMenu;
+import com.mervyn.sparrow.system.param.MenuQuery;
 import org.apache.ibatis.annotations.Mapper;
 
 import java.util.List;
@@ -27,6 +28,8 @@ public interface SysMenuMapper {
     int updateByPrimaryKey(SysMenu record);
 
     List<SysMenu> selectList(SysMenu param);
+
+    List<SysMenu> selectPage(MenuQuery param);
 
     List<SysMenu> getListByIds(List<Long> ids);
 

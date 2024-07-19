@@ -234,7 +234,7 @@
         <if test="status != null and status != ''">
             and status = #{status}
         </if>
-        order by update_time desc
+        order by create_time desc
     </select>
 
     <select id="getListByIds" resultMap="BaseResultMap">
@@ -251,5 +251,23 @@
         from sys_menu
         where deleted = false
         and path = #{path}
+    </select>
+    <select id="selectPage" resultType="com.mervyn.sparrow.system.model.SysMenu">
+        select *
+        from sys_menu
+        where deleted = false
+        <if test="name != null and name != ''">
+            and name like concat('%', #{name}, '%')
+        </if>
+        <if test="type != null and type != ''">
+            and type = #{type}
+        </if>
+        <if test="permission != null and permission != ''">
+            and permission = #{permission}
+        </if>
+        <if test="status != null and status != ''">
+            and status = #{status}
+        </if>
+        order by create_time desc
     </select>
 </mapper>

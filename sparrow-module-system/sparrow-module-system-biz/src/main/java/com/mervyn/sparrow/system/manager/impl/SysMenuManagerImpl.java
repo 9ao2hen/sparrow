@@ -1,6 +1,10 @@
 package com.mervyn.sparrow.system.manager.impl;
 
 import cn.hutool.core.util.StrUtil;
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
+import com.mervyn.sparrow.common.data.domain.PageResult;
+import com.mervyn.sparrow.common.data.domain.Pages;
 import com.mervyn.sparrow.common.enums.SystemEnum;
 import com.mervyn.sparrow.config.lang.AssertSpr;
 import com.mervyn.sparrow.system.entity.SysMenuDTO;
@@ -8,6 +12,7 @@ import com.mervyn.sparrow.system.infrastructure.SysMenuConverter;
 import com.mervyn.sparrow.system.manager.SysMenuManager;
 import com.mervyn.sparrow.system.mapper.SysMenuMapper;
 import com.mervyn.sparrow.system.model.SysMenu;
+import com.mervyn.sparrow.system.param.MenuQuery;
 import jakarta.annotation.Resource;
 import org.springframework.stereotype.Service;
 
@@ -26,12 +31,12 @@ public class SysMenuManagerImpl implements SysMenuManager {
 
     @Override
     public Long add(SysMenuDTO menuDTO) {
-        SysMenu byPath = getByPath(menuDTO.getPath());
+//        SysMenu byPath = getByPath(menuDTO.getPath());
         //path 唯一性验证
-        AssertSpr.isNull(byPath,"{}已存在",menuDTO.getPath());
+//        AssertSpr.isNull(byPath,"{}已存在",menuDTO.getPath());
         SysMenu sysMenu = SysMenuConverter.INSTANCE.dto2Po(menuDTO);
         sysMenu.setId(sysMenu.getId());
-        sysMenu.setDeleted(SystemEnum.Deleted.DELETED.getCode());
+        sysMenu.setDeleted(SystemEnum.Deleted.UNDELETED.getCode());
         sysMenu.setStatus(SystemEnum.CommonStatus.enable.getCode());
         int row = mapper.insertSelective(sysMenu);
         return row > 0 ? sysMenu.getId() : null;
@@ -39,6 +44,8 @@ public class SysMenuManagerImpl implements SysMenuManager {
 
     @Override
     public Long update(SysMenuDTO menuDTO) {
+        //id 不能为空
+        AssertSpr.notNull(menuDTO.getId(),"id 不能为空");
         SysMenu byPath = getByPath(menuDTO.getPath());
         if (Objects.nonNull(byPath)){
             AssertSpr.isTrue(StrUtil.equals(String.valueOf(byPath.getId()),menuDTO.getId()),"path 已经存在");
@@ -76,10 +83,16 @@ public class SysMenuManagerImpl implements SysMenuManager {
     @Override
     public List<SysMenu> getMenuByRole(String roleId){
         //todo 根据角色获取菜单
-
-
-
         return null;
+    }
+
+    @Override
+    public PageResult<SysMenuDTO> getPage(MenuQuery query) {
+        PageHelper.startPage(query.getPageNumber(),query.getPageSize());
+        List<SysMenu> userList = mapper.selectPage(query);
+        PageInfo<SysMenu> pageInfo = new PageInfo<>(userList);
+        List<SysMenuDTO> list = SysMenuConverter.INSTANCE.po2Dto(userList);
+        return Pages.of(list, pageInfo.getPageSize(), pageInfo.getPageNum(), pageInfo.getTotal());
     }
 
 

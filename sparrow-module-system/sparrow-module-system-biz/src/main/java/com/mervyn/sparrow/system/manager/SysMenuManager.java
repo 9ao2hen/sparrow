@@ -1,7 +1,9 @@
 package com.mervyn.sparrow.system.manager;
 
+import com.mervyn.sparrow.common.data.domain.PageResult;
 import com.mervyn.sparrow.system.entity.SysMenuDTO;
 import com.mervyn.sparrow.system.model.SysMenu;
+import com.mervyn.sparrow.system.param.MenuQuery;
 
 import java.util.List;
 
@@ -21,4 +23,6 @@ public interface SysMenuManager {
     List<SysMenu> selectMenu(SysMenu menu);
 
     List<SysMenu> getMenuByRole(String roleId);
+
+    PageResult<SysMenuDTO> getPage(MenuQuery query);
 }

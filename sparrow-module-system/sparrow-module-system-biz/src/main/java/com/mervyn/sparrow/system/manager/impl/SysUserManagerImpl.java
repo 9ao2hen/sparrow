@@ -92,13 +92,12 @@ public class SysUserManagerImpl implements SysUserManager {
     }
 
     @Override
-    public PageResult<SysUserDTO> getPage(SysUserQuery query) {
+    public PageResult<SysUserDTO> getPage( SysUserQuery query) {
         PageHelper.startPage(query.getPageNumber(),query.getPageSize());
         List<SysUser> userList = mapper.selectPage(query);
         PageInfo<SysUser> pageInfo = new PageInfo<>(userList);
         List<SysUserDTO> list = SysUserConverter.INSTANCE.po2Dto(userList);
-        PageResult<SysUserDTO> pageResult = Pages.of(list, pageInfo.getPageSize(), pageInfo.getPageNum(), pageInfo.getTotal());
-        return pageResult;
+        return Pages.of(list, pageInfo.getPageSize(), pageInfo.getPageNum(), pageInfo.getTotal());
     }
 
 

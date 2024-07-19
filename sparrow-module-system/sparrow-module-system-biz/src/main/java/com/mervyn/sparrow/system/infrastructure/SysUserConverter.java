@@ -21,24 +21,21 @@ public interface SysUserConverter {
 
     SysUserConverter INSTANCE = Mappers.getMapper(SysUserConverter.class);
 
-    //po -> dto
+    //PO -> DTO
     SysUserDTO po2Dto(SysUser po);
-
     List<SysUserDTO> po2Dto(List<SysUser> list);
 
-    //dto -> po
+    //DTO -> PO
     SysUser dto2Po(SysUserDTO dto);
-
     List<SysUser> dto2Po(List<SysUserDTO> dto);
 
-    //dto -> vo
+    //DTO -> VO
     @Mapping(source = "gender", target = "gender", qualifiedByName = "genderMapping")
     @Mapping(source = "status", target = "status", qualifiedByName = "statusMapping")
     SysUserVo dto2Vo(SysUserDTO dto);
-
     List<SysUserVo> dto2Vo(List<SysUserDTO> dto);
 
-    //erq -> dto
+    //Req -> DTO
     SysUserDTO addReq2Dto(SysUserAddReq req);
 
 

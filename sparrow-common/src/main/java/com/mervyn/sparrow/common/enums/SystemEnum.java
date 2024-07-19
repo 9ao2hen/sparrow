@@ -59,6 +59,39 @@ public interface SystemEnum {
         }
     }
 
+    //菜单类型 1:目录,2:菜单，3：按钮
+    enum MenuType {
+        unknown("0", "未知"),
+        catalog("1", "目录"),
+        menu("2", "菜单"),
+        button("3", "按钮");
+
+        final String code;
+        final String desc;
+
+        MenuType(String code, String desc) {
+            this.code = code;
+            this.desc = desc;
+        }
+
+        public String getCode() {
+            return code;
+        }
+
+        public String getDesc() {
+            return desc;
+        }
+
+        public static String getDesc(String code) {
+            for (MenuType menuType : MenuType.values()) {
+                if (menuType.getCode().equals(code)) {
+                    return menuType.getDesc();
+                }
+            }
+            return unknown.getDesc();
+        }
+    }
+
 
     /**
      * 状态 ‘1’：正常 ‘2’：禁用
